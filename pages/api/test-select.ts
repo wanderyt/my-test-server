@@ -195,6 +195,65 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           ],
           "action_id": "multi_static_select-action"
         }
+      },
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": "This is a section block with checkboxes."
+        },
+        "accessory": {
+          "type": "checkboxes",
+          "options": [
+            {
+              "text": {
+                "type": "mrkdwn",
+                "text": "*this is mrkdwn text*"
+              },
+              "description": {
+                "type": "mrkdwn",
+                "text": "*this is mrkdwn text*"
+              },
+              "value": "value-0"
+            },
+            {
+              "text": {
+                "type": "mrkdwn",
+                "text": "*this is mrkdwn text*"
+              },
+              "description": {
+                "type": "mrkdwn",
+                "text": "*this is mrkdwn text*"
+              },
+              "value": "value-1"
+            },
+            {
+              "text": {
+                "type": "mrkdwn",
+                "text": "*this is mrkdwn text*"
+              },
+              "description": {
+                "type": "mrkdwn",
+                "text": "*this is mrkdwn text*"
+              },
+              "value": "value-2"
+            }
+          ],
+          "action_id": "checkboxes-action"
+        }
+      },
+      {
+        "dispatch_action": true,
+        "type": "input",
+        "element": {
+          "type": "plain_text_input",
+          "action_id": "plain_text_input-action"
+        },
+        "label": {
+          "type": "plain_text",
+          "text": "Label",
+          "emoji": true
+        }
       }
     ]
   }
