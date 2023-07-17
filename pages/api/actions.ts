@@ -19,11 +19,13 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   } finally {
     console.log('returning response: ', selectedAction);
     const reqBody = JSON.parse(req.body.payload) as SlackAction;
+    const checkboxAction = getCheckboxAction('checkboxes-action', reqBody);
     axios.post(reqBody.response_url, {
       "text": "Oh hey, this is a nifty ephemeral message response from David, and you just selected " + selectedAction,
       "response_type": "in_channel",
       "replace_original": false,
-      "thread_ts": reqBody.container.message_ts,
+      // "thread_ts": reqBody.container.message_ts,
+      "thread_ts": checkboxAction.action_ts,
     }).finally(() => {
       res.status(200).json({selected: selectedAction});
     });
