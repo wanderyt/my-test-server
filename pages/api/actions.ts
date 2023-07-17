@@ -3,11 +3,13 @@ import { SlackAction } from '../../src/utils/slack-action';
 import { getCheckboxAction } from '../../src/utils/action-util';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  console.log('actions: ', req.body);
+  console.log('action response: ', req.body);
+  console.log('typeof actions: ', typeof req.body);
+  console.log('typeof actions: ', typeof req.body.actions);
   let selectedAction = '';
 
   try {
-    const reqBody = JSON.parse(req.body) as SlackAction;
+    const reqBody = req.body as SlackAction;
 
     const checkboxAction = getCheckboxAction('checkboxes-action', reqBody);
 
