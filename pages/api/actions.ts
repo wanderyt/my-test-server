@@ -13,10 +13,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       selectedAction = checkboxAction.selected_options.map(o => o.value).join(', ');
     }
 
-
   } catch (e) {
     console.log('error: ', e);
   } finally {
+    console.log('returning response: ', selectedAction);
     res.status(200).json({selected: selectedAction});
   }
 }
