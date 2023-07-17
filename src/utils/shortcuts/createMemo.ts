@@ -36,7 +36,7 @@ export const saveMemoHandler = (response: ShortcutCallbackResponse) => {
 
   return {
     trigger_id: response.trigger_id,
-    blocks: viewBlocks,
+    view: viewBlocks,
   };
 }
 

@@ -33,7 +33,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             'Authorization': 'Bearer xoxb-1583951561970-4934854640485-U8ITBVK9cBtryETdX9e7nrOx'
           }
         })
-        res.status(200).send('message saved!');
+        res.status(200).send();
       }
     }
   } catch (e) {
