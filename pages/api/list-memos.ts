@@ -1,4 +1,4 @@
-import { getMemoRecords } from '@/src/storage';
+import { getMemoRecords } from '../../src/storage';
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {

@@ -1,7 +1,7 @@
-import { MemoRecord } from "@/src/storage/types";
+import { MemoRecord } from "../../storage/types";
 import { ShortcutCallbackResponse } from "../slack-shortcut-callback";
 import { v4 as uuidV4 } from 'uuid';
-import { createMemoRecord } from "@/src/storage";
+import { createMemoRecord } from "../../storage";
 
 export const createMemoHandler = (response: ShortcutCallbackResponse) => {
   const newMemoRecord: MemoRecord = {

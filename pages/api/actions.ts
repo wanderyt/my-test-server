@@ -2,8 +2,8 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { SlackAction } from '../../src/utils/slack-action';
 import { checkActionType, getCheckboxAction } from '../../src/utils/action-util';
 import axios from 'axios'
-import { ShortcutCallbackResponse } from '@/src/utils/slack-shortcut-callback';
-import { createMemoHandler } from '@/src/utils/shortcuts/createMemo';
+import { ShortcutCallbackResponse } from '../../src/utils/slack-shortcut-callback';
+import { createMemoHandler } from '../../src/utils/shortcuts/createMemo';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   console.log('action response: ', req.body);
