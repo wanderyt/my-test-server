@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { SlackAction } from '../../src/utils/slack-action';
 import { getCheckboxAction } from '../../src/utils/action-util';
+import axios from 'axios'
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   console.log('action response: ', req.body);
@@ -17,6 +18,11 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     console.log('error: ', e);
   } finally {
     console.log('returning response: ', selectedAction);
-    res.status(200).json({selected: selectedAction});
+
+    axios.post(req.body.response_url, {
+      "text": "Oh hey, this is a nifty ephemeral message response from David, and you just selected " + selectedAction,
+    }).finally(() => {
+      res.status(200).json({selected: selectedAction});
+    });
   }
 }
