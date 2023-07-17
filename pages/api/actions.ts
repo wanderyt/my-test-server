@@ -29,7 +29,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const blocks = saveMemoHandler(reqBody);
         await axios.post('https://slack.com/api/views.open', blocks, {
           headers: {
-            'Content-type': 'application/json',
+            'Content-Type': 'application/json',
             'Authorization': 'Bearer xoxb-1583951561970-4934854640485-U8ITBVK9cBtryETdX9e7nrOx'
           }
         })
