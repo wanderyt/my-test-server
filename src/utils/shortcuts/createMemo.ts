@@ -4,7 +4,7 @@ import { v4 as uuidV4 } from 'uuid';
 import { createMemoRecord } from "../../storage";
 
 export const saveMemoHandler = (response: ShortcutCallbackResponse) => {
-  const blocks = {
+  const viewBlocks = {
     "title": {
       "type": "plain_text",
       "text": "Save your memo"
@@ -34,7 +34,10 @@ export const saveMemoHandler = (response: ShortcutCallbackResponse) => {
     "callback_id": "create_memo_modal"
   };
 
-  return blocks;
+  return {
+    trigger_id: response.trigger_id,
+    blocks: viewBlocks,
+  };
 }
 
 export const createMemoHandler = (response: ShortcutCallbackResponse) => {
