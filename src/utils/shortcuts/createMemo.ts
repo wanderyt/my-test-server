@@ -21,7 +21,7 @@ export const saveMemoHandler = (response: ShortcutCallbackResponse) => {
           "action_id": "memo_title",
           "placeholder": {
             "type": "plain_text",
-            "text": "Give this memo a title to remember by"
+            "text": "Give this memo a title to remember it by"
           }
         },
         "label": {

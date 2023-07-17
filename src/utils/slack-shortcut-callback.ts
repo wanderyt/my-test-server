@@ -76,4 +76,66 @@ const callbackResponse = {
   }
 };
 
+const memoCallback = {
+  "type": "message_action",
+  "token": "hcwQPzye2Pyoo1CsGeIYK1to",
+  "action_ts": "1689583011.899133",
+  "team": {
+    "id": "T01H5TZGHUJ",
+    "domain": "cash",
+    "enterprise_id": "E01BAFDEXUP",
+    "enterprise_name": "Block, Inc."
+  },
+  "user": {
+    "id": "U02UQL045PZ",
+    "username": "050897",
+    "team_id": "T01H5TZGHUJ",
+    "name": "050897"
+  },
+  "channel": { "id": "D030F16H76C", "name": "directmessage" },
+  "is_enterprise_install": false,
+  "enterprise": { "id": "E01BAFDEXUP", "name": "Block, Inc." },
+  "callback_id": "create_memo",
+  "trigger_id": "5585837729429.1583951561970.f483131395ca5b6c921d829ef551839d",
+  "response_url": "https://hooks.slack.com/app/T01H5TZGHUJ/5601400636097/vu5qmGGJxnBHRlcpEEYsheKA",
+  "message_ts": "1687145251.905499",
+  "message": {
+    "client_msg_id": "57fe8d27-619b-40ac-a490-e770eb073494",
+    "type": "message",
+    "text": "<https://adm-assets.afterpay-beta.com/images/d8a5cc99-ea0b-4da6-bf9c-fa6fb043a8e7.jpeg>",
+    "user": "U02UQL045PZ",
+    "ts": "1687145251.905499",
+    "blocks": [
+      {
+        "type": "rich_text",
+        "block_id": "5YQC",
+        "elements": [
+          {
+            "type": "rich_text_section",
+            "elements": [
+              {
+                "type": "link",
+                "url": "https://adm-assets.afterpay-beta.com/images/d8a5cc99-ea0b-4da6-bf9c-fa6fb043a8e7.jpeg"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "team": "T01H5TZGHUJ",
+    "attachments": [
+      {
+        "image_url": "https://adm-assets.afterpay-beta.com/images/d8a5cc99-ea0b-4da6-bf9c-fa6fb043a8e7.jpeg",
+        "image_width": 1920,
+        "image_height": 1200,
+        "image_bytes": 128925,
+        "from_url": "https://adm-assets.afterpay-beta.com/images/d8a5cc99-ea0b-4da6-bf9c-fa6fb043a8e7.jpeg",
+        "id": 1,
+        "original_url": "https://adm-assets.afterpay-beta.com/images/d8a5cc99-ea0b-4da6-bf9c-fa6fb043a8e7.jpeg",
+        "fallback": "1920x1200px image"
+      }
+    ]
+  }
+};
+
 export type ShortcutCallbackResponse = typeof callbackResponse;
