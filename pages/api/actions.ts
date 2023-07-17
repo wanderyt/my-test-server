@@ -25,7 +25,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       "response_type": "in_channel",
       "replace_original": false,
       // "thread_ts": reqBody.container.message_ts,
-      "thread_ts": checkboxAction.action_ts,
+      "thread_ts": checkboxAction?.action_ts || '',
     }).finally(() => {
       res.status(200).json({selected: selectedAction});
     });
