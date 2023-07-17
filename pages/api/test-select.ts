@@ -208,33 +208,33 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
             {
               "text": {
                 "type": "mrkdwn",
-                "text": "*this is mrkdwn text*"
+                "text": "*option 0*"
               },
               "description": {
                 "type": "mrkdwn",
-                "text": "*this is mrkdwn text*"
+                "text": "*option 0*"
               },
               "value": "value-0"
             },
             {
               "text": {
                 "type": "mrkdwn",
-                "text": "*this is mrkdwn text*"
+                "text": "*option 1*"
               },
               "description": {
                 "type": "mrkdwn",
-                "text": "*this is mrkdwn text*"
+                "text": "*option 1*"
               },
               "value": "value-1"
             },
             {
               "text": {
                 "type": "mrkdwn",
-                "text": "*this is mrkdwn text*"
+                "text": "*option 2*"
               },
               "description": {
                 "type": "mrkdwn",
-                "text": "*this is mrkdwn text*"
+                "text": "*option 2*"
               },
               "value": "value-2"
             }
