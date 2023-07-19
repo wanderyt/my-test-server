@@ -27,13 +27,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (callbackId === 'create_memo') {
         // createMemoHandler(reqBody);
         const blocks = saveMemoHandler(reqBody);
-
-        console.log("blocks: ", JSON.stringify(blocks));
+        const view = JSON.stringify(blocks.view, null, 0);
+        console.log("blocks: ", JSON.stringify(blocks.view, null, 0));
         console.log("env bot token: ", 'Bearer ' + process.env.SLACK_BOT_TOKEN + ';');
-        const response = await axios.post('https://slack.com/api/views.open', blocks, {
+        const formData = new FormData();
+        formData.append('token', process.env.SLACK_BOT_TOKEN || '');
+        const response = await axios.post(`https://slack.com/api/views.open?view=${view}&trigger_id=${blocks.trigger_id}`, formData, {
           headers: {
-            'Content-Type': 'application/json; charset=utf-8',
-            'Authorization': 'Bearer ' + process.env.SLACK_BOT_TOKEN,
+            // 'Content-Type': 'application/json; charset=utf-8',
+            'Content-Type': 'application/x-www-form-urlencoded',
+            // 'Authorization': 'Bearer ' + process.env.SLACK_BOT_TOKEN,
           }
         })
         console.log("modal open response: ", response.data);
