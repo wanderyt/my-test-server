@@ -34,7 +34,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             'Authorization': 'Bearer ' + process.env.SLACK_BOT_TOKEN,
           }
         })
-        console.log("modal open response: ", response);
+        // console.log("modal open response: ", response);
         res.status(200).send('');
       }
     }
