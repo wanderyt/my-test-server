@@ -27,6 +27,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (callbackId === 'create_memo') {
         // createMemoHandler(reqBody);
         const blocks = saveMemoHandler(reqBody);
+
+        console.log("blocks: ", JSON.stringify(blocks));
         console.log("env bot token: ", 'Bearer ' + process.env.SLACK_BOT_TOKEN + ';');
         const response = await axios.post('https://slack.com/api/views.open', blocks, {
           headers: {
