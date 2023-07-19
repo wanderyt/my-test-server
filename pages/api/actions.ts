@@ -30,7 +30,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         console.log("env bot token: ", process.env.SLACK_BOT_TOKEN);
         const response = await axios.post('https://slack.com/api/views.open', blocks, {
           headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json; charset=utf-8',
             'Authorization': 'Bearer ' + process.env.SLACK_BOT_TOKEN,
           }
         })
