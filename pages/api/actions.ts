@@ -4,7 +4,7 @@ import { checkActionType, getCheckboxAction } from '../../src/utils/action-util'
 import axios from 'axios'
 import { ShortcutCallbackResponse } from '../../src/utils/slack-shortcut-callback';
 import { createMemoHandler, saveMemoHandler } from '../../src/utils/shortcuts/createMemo';
-import { headers } from 'next/dist/client/components/headers';
+import { openView } from '../../src/utils/api-calls/view-open';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   console.log('action response: ', req.body);
@@ -26,20 +26,28 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const callbackId = (reqBody as ShortcutCallbackResponse).callback_id;
       if (callbackId === 'create_memo') {
         // createMemoHandler(reqBody);
+        // const blocks = saveMemoHandler(reqBody);
+        // const view = JSON.stringify(blocks.view, null, 0);
+        // console.log("blocks: ", JSON.stringify(blocks.view, null, 0));
+        // console.log("env bot token: ", 'Bearer ' + process.env.SLACK_BOT_TOKEN + ';');
+        // const formData = new FormData();
+        // formData.append('token', process.env.SLACK_BOT_TOKEN || '');
+        // const response = await axios.post(`https://slack.com/api/views.open?view=${view}&trigger_id=${blocks.trigger_id}`, formData, {
+        //   headers: {
+        //     // 'Content-Type': 'application/json; charset=utf-8',
+        //     'Content-Type': 'application/x-www-form-urlencoded',
+        //     // 'Authorization': 'Bearer ' + process.env.SLACK_BOT_TOKEN,
+        //   }
+        // })
+
         const blocks = saveMemoHandler(reqBody);
-        const view = JSON.stringify(blocks.view, null, 0);
+        // const view = JSON.stringify(blocks.view, null, 0);
         console.log("blocks: ", JSON.stringify(blocks.view, null, 0));
         console.log("env bot token: ", 'Bearer ' + process.env.SLACK_BOT_TOKEN + ';');
-        const formData = new FormData();
-        formData.append('token', process.env.SLACK_BOT_TOKEN || '');
-        const response = await axios.post(`https://slack.com/api/views.open?view=${view}&trigger_id=${blocks.trigger_id}`, formData, {
-          headers: {
-            // 'Content-Type': 'application/json; charset=utf-8',
-            'Content-Type': 'application/x-www-form-urlencoded',
-            // 'Authorization': 'Bearer ' + process.env.SLACK_BOT_TOKEN,
-          }
-        })
-        console.log("modal open response: ", response.data);
+        await openView({
+          triggerId: blocks.trigger_id,
+          view: blocks.view
+        });
         res.status(200).send('');
       }
     }
