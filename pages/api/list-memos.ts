@@ -261,20 +261,23 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   //   ]
   // }
 
-  const payload = req.body as SlackMessageRequest;
-  const memoRecords = getMemoRecords();
-  const memoTemplate = (memo: MemoRecord) => {
-    return {
-      "type": "section",
-      "text": {
-        "type": "mrkdwn",
-        "text": `*<${memo.url}|${memo.title}>* - ${memo.url}`
+  try {
+    const memoRecords = getMemoRecords();
+    const memoTemplate = (memo: MemoRecord) => {
+      return {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": `*<${memo.url}|${memo.title}>* - ${memo.url}`
+        }
       }
-    }
-  }
+    };
 
-  const blocks = {
-    blocks: memoRecords.filter((record) => record.userId === payload.user_id).map(memoTemplate)
+    const blocks = {
+      blocks: memoRecords.filter((record) => record.userId === (req.body as SlackMessageRequest).user_id).map(memoTemplate)
+    };
+    res.status(200).json(blocks);
+  } catch (e) {
+    res.status(200).send('');
   }
-  res.status(200).json(blocks);
 }
