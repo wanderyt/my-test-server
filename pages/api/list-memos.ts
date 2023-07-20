@@ -265,7 +265,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       "type": "section",
       "text": {
         "type": "mrkdwn",
-        "text": `*<${memo.url}|${memo.title}>*`
+        "text": `*<${memo.url}|${memo.title}>* - ${memo.url}`
       }
     }
   }
