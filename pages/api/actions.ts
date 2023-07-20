@@ -5,6 +5,7 @@ import axios from 'axios'
 import { ShortcutCallbackResponse } from '../../src/utils/slack-shortcut-callback';
 import { createMemoHandler, saveMemoHandler } from '../../src/utils/shortcuts/createMemo';
 import { openView } from '../../src/utils/api-calls/view-open';
+import { postMessage } from '../../src/utils/api-calls/post-message';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   console.log('action response: ', req.body);
@@ -44,9 +45,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         // const view = JSON.stringify(blocks.view, null, 0);
         console.log("blocks: ", JSON.stringify(blocks.view, null, 0));
         console.log("env bot token: ", 'Bearer ' + process.env.SLACK_BOT_TOKEN + ';');
-        await openView({
-          triggerId: blocks.trigger_id,
-          view: blocks.view
+        // await openView({
+        //   triggerId: blocks.trigger_id,
+        //   view: blocks.view
+        // });
+        await postMessage({
+          message: 'saved!'
         });
         res.status(200).send('');
       }
