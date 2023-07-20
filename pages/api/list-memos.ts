@@ -260,7 +260,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   //   ]
   // }
 
-  const payload = req.body.payload;
+  const payload = req.body;
   console.log('payload: ', payload);
   const memoRecords = getMemoRecords();
   const memoTemplate = (memo: MemoRecord) => {
