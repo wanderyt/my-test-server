@@ -6,6 +6,7 @@ import { ShortcutCallbackResponse } from '../../src/utils/slack-shortcut-callbac
 import { createMemoHandler, saveMemoHandler } from '../../src/utils/shortcuts/createMemo';
 import { openView } from '../../src/utils/api-calls/view-open';
 import { postMessage } from '../../src/utils/api-calls/post-message';
+import { ModalSubmitPayload } from '../../src/utils/slack-modal-submit';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   console.log('action response: ', req.body);
@@ -41,7 +42,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         res.status(200).send('');
       }
     } else if (actionType === 'view_submission') {
-      // createMemoHandler(reqBody);
+      const callbackId = (reqBody as ModalSubmitPayload).view.callback_id;
+      if (callbackId === 'create_memo_modal') {
+        const memo = createMemoHandler(reqBody);
+        await postMessage({
+          message: 'Saved this memo - ' + memo.url
+        });
+        res.status(200).send('');
+      }
     }
   } catch (e) {
     console.log(e);

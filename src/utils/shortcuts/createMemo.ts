@@ -2,6 +2,7 @@ import { MemoRecord } from "../../storage/types";
 import { ShortcutCallbackResponse } from "../slack-shortcut-callback";
 import { v4 as uuidV4 } from 'uuid';
 import { createMemoRecord } from "../../storage";
+import { ModalSubmitPayload } from "../slack-modal-submit";
 
 export const saveMemoHandler = (response: ShortcutCallbackResponse) => {
   const viewBlocks = {
@@ -43,12 +44,26 @@ export const saveMemoHandler = (response: ShortcutCallbackResponse) => {
   };
 }
 
-export const createMemoHandler = (response: ShortcutCallbackResponse) => {
+export const createMemoHandler = (response: ModalSubmitPayload) => {
+  let url = '', title = '';
+  try {
+    const metaData = JSON.parse(response.view.private_metadata);
+    url = metaData.originalChatUrl;
+  } catch (e) {
+  }
+
+  const inputId = response.view.blocks.find((block) => block.type === 'input')?.block_id || '';
+  if (inputId) {
+    title = response.view.state.values[inputId].memo_title.value;
+  }
+
   const newMemoRecord: MemoRecord = {
     memoId: uuidV4(),
-    title: '',
-    url: `https://cash.slack.com/archives/${response.channel.id}/p${response.message.thread_ts.split('.').join('')}`
+    title,
+    url
   };
 
   createMemoRecord(newMemoRecord);
+
+  return newMemoRecord;
 }

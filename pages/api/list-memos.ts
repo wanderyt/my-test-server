@@ -259,5 +259,5 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     ]
   }
   const memoRecords = getMemoRecords();
-  res.status(200).json({memoRecords});
+  res.status(200).send(memoRecords.map((record) => record.url).join('\/n'));
 }
