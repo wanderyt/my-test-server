@@ -45,10 +45,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         // const view = JSON.stringify(blocks.view, null, 0);
         console.log("blocks: ", JSON.stringify(blocks.view, null, 0));
         console.log("env bot token: ", 'Bearer ' + process.env.SLACK_BOT_TOKEN + ';');
-        // await openView({
-        //   triggerId: blocks.trigger_id,
-        //   view: blocks.view
-        // });
+        await openView({
+          triggerId: blocks.trigger_id,
+          view: blocks.view
+        });
         await postMessage({
           message: 'saved!'
         });
