@@ -1,6 +1,7 @@
 import { getMemoRecords } from '../../src/storage';
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { MemoRecord } from '../../src/storage/types';
+import { SlackMessageRequest } from '../../src/utils/slack-message';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   // const mySelections = {
@@ -260,8 +261,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   //   ]
   // }
 
-  const payload = req.body;
-  console.log('payload: ', payload);
+  const payload = req.body as SlackMessageRequest;
   const memoRecords = getMemoRecords();
   const memoTemplate = (memo: MemoRecord) => {
     return {
@@ -274,7 +274,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   const blocks = {
-    blocks: memoRecords.map(memoTemplate)
+    blocks: memoRecords.filter((record) => record.userId === payload.user_id).map(memoTemplate)
   }
   res.status(200).json(blocks);
 }
