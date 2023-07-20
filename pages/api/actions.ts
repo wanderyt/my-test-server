@@ -36,9 +36,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           triggerId: blocks.trigger_id,
           view: blocks.view
         });
-        await postMessage({
-          message: 'saved!'
-        });
         res.status(200).send('');
       }
     } else if (actionType === 'view_submission') {

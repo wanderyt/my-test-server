@@ -1,5 +1,6 @@
 import { getMemoRecords } from '../../src/storage';
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { MemoRecord } from '../../src/storage/types';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const mySelections = {
@@ -259,5 +260,18 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     ]
   }
   const memoRecords = getMemoRecords();
-  res.status(200).send(memoRecords.map((record) => record.url).join('\/n'));
+  const memoTemplate = (memo: MemoRecord) => {
+    return {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": `*<${memo.url}|${memo.title}>*`
+      }
+    }
+  }
+
+  const blocks = {
+    blocks: memoRecords.map(memoTemplate)
+  }
+  res.status(200).json(blocks);
 }
