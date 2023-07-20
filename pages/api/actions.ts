@@ -14,6 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     const reqBody = JSON.parse(req.body.payload);
     const actionType = checkActionType(reqBody);
+    console.log('action type: ', actionType);
     if (actionType === 'block_actions') {
       const checkboxAction = getCheckboxAction('checkboxes-action', reqBody as SlackAction);
       if (checkboxAction) {
