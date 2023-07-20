@@ -56,11 +56,13 @@ export const createMemoHandler = (response: ModalSubmitPayload) => {
   if (inputId) {
     title = response.view.state.values[inputId].memo_title.value;
   }
+  const userId = response.user.id;
 
   const newMemoRecord: MemoRecord = {
     memoId: uuidV4(),
     title,
-    url
+    url,
+    userId
   };
 
   createMemoRecord(newMemoRecord);
