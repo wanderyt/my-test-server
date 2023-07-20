@@ -1,6 +1,6 @@
 import { SlackAction } from "./slack-action";
 
-export const checkActionType = (response: any): 'message_action' | 'block_actions' => {
+export const checkActionType = (response: any): 'message_action' | 'block_actions' | 'view_submission' => {
   return response.type;
 }
 

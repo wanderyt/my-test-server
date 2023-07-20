@@ -27,21 +27,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     } else if (actionType === 'message_action') {
       const callbackId = (reqBody as ShortcutCallbackResponse).callback_id;
       if (callbackId === 'create_memo') {
-        // createMemoHandler(reqBody);
-        // const blocks = saveMemoHandler(reqBody);
-        // const view = JSON.stringify(blocks.view, null, 0);
-        // console.log("blocks: ", JSON.stringify(blocks.view, null, 0));
-        // console.log("env bot token: ", 'Bearer ' + process.env.SLACK_BOT_TOKEN + ';');
-        // const formData = new FormData();
-        // formData.append('token', process.env.SLACK_BOT_TOKEN || '');
-        // const response = await axios.post(`https://slack.com/api/views.open?view=${view}&trigger_id=${blocks.trigger_id}`, formData, {
-        //   headers: {
-        //     // 'Content-Type': 'application/json; charset=utf-8',
-        //     'Content-Type': 'application/x-www-form-urlencoded',
-        //     // 'Authorization': 'Bearer ' + process.env.SLACK_BOT_TOKEN,
-        //   }
-        // })
-
         const blocks = saveMemoHandler(reqBody);
         // const view = JSON.stringify(blocks.view, null, 0);
         console.log("blocks: ", JSON.stringify(blocks.view, null, 0));
@@ -55,6 +40,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         });
         res.status(200).send('');
       }
+    } else if (actionType === 'view_submission') {
+      // createMemoHandler(reqBody);
     }
   } catch (e) {
     console.log(e);
