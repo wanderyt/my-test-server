@@ -34,7 +34,7 @@ export const saveMemoHandler = (response: ShortcutCallbackResponse) => {
     "type": "modal",
     "callback_id": "create_memo_modal",
     "private_metadata": JSON.stringify({
-      originalChatUrl: `https://cash.slack.com/archives/${response.channel.id}/p${response.message.thread_ts.split('.').join('')}`
+      originalChatUrl: `https://cash.slack.com/archives/${response.channel.id}/p${response.message_ts.split('.').join('')}`
     }),
   };
 
