@@ -278,6 +278,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     };
     res.status(200).json(blocks);
   } catch (e) {
-    res.status(200).send('');
+    res.status(200);
   }
 }
