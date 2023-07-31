@@ -67,6 +67,7 @@ export const createMemoHandler = async (response: ModalSubmitPayload) => {
   };
 
   // createMemoRecord(newMemoRecord);
+  console.log("ready to create memo: ", JSON.stringify(newMemoRecord))
   await createMemo(newMemoRecord);
 
   return newMemoRecord;
