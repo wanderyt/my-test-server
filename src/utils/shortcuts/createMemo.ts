@@ -3,6 +3,7 @@ import { ShortcutCallbackResponse } from "../slack-shortcut-callback";
 import { v4 as uuidV4 } from 'uuid';
 import { createMemoRecord } from "../../storage";
 import { ModalSubmitPayload } from "../slack-modal-submit";
+import { createMemo } from "../../db/memo";
 
 export const saveMemoHandler = (response: ShortcutCallbackResponse) => {
   const viewBlocks = {
@@ -44,7 +45,7 @@ export const saveMemoHandler = (response: ShortcutCallbackResponse) => {
   };
 }
 
-export const createMemoHandler = (response: ModalSubmitPayload) => {
+export const createMemoHandler = async (response: ModalSubmitPayload) => {
   let url = '', title = '';
   try {
     const metaData = JSON.parse(response.view.private_metadata);
@@ -65,7 +66,8 @@ export const createMemoHandler = (response: ModalSubmitPayload) => {
     userId
   };
 
-  createMemoRecord(newMemoRecord);
+  // createMemoRecord(newMemoRecord);
+  await createMemo(newMemoRecord);
 
   return newMemoRecord;
 }

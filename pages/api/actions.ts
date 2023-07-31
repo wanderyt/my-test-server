@@ -41,7 +41,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     } else if (actionType === 'view_submission') {
       const callbackId = (reqBody as ModalSubmitPayload).view.callback_id;
       if (callbackId === 'create_memo_modal') {
-        const memo = createMemoHandler(reqBody);
+        const memo = await createMemoHandler(reqBody);
         await postMessage({
           message: 'Saved this memo - ' + memo.url
         });

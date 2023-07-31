@@ -2,8 +2,9 @@ import { getMemoRecords } from '../../src/storage';
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { MemoRecord } from '../../src/storage/types';
 import { SlackMessageRequest } from '../../src/utils/slack-message';
+import { getMemo } from '../../src/db/memo';
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   // const mySelections = {
   //   "blocks": [
   //     {
@@ -262,7 +263,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   // }
 
   try {
-    const memoRecords = getMemoRecords();
+    // const memoRecords = getMemoRecords();
+    const userId = (req.body as SlackMessageRequest).user_id;
+    const memoRecords = await getMemo(userId);
     const memoTemplate = (memo: MemoRecord) => {
       return {
         "type": "section",
@@ -274,7 +277,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     };
 
     const blocks = {
-      blocks: memoRecords.filter((record) => record.userId === (req.body as SlackMessageRequest).user_id).map(memoTemplate)
+      // blocks: memoRecords.filter((record) => record.userId === (req.body as SlackMessageRequest).user_id).map(memoTemplate)
+      blocks: memoRecords.data.rows.map(memoTemplate)
     };
     res.status(200).json(blocks);
   } catch (e) {
