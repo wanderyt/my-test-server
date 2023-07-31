@@ -265,7 +265,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     // const memoRecords = getMemoRecords();
     const userId = (req.body as SlackMessageRequest).user_id;
+    console.log("userId: ", userId);
     const memoRecords = await getMemo(userId);
+    console.log("memoRecords: ", JSON.stringify(memoRecords));
     const memoTemplate = (memo: MemoRecord) => {
       return {
         "type": "section",
