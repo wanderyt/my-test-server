@@ -265,10 +265,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     // const memoRecords = getMemoRecords();
     const userId = (req.body as SlackMessageRequest).user_id;
-    console.log("userId: ", userId);
     const memoRecords = await getMemo(userId);
-    console.log("memoRecords: ", memoRecords);
-    console.log("memoRecords: ", JSON.stringify(memoRecords));
     const memoTemplate = (memo: MemoRecord) => {
       return {
         "type": "section",
@@ -281,7 +278,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const blocks = {
       // blocks: memoRecords.filter((record) => record.userId === (req.body as SlackMessageRequest).user_id).map(memoTemplate)
-      blocks: memoRecords.data.rows.map(memoTemplate)
+      blocks: memoRecords.data.data.rows.map(memoTemplate)
     };
     res.status(200).json(blocks);
   } catch (e) {
