@@ -4,3 +4,10 @@ export type MemoRecord = {
   url: string;
   userId: string;
 }
+
+export type MemoRecordDB = {
+  MEMOID: string;
+  TITLE: string;
+  URL: string;
+  USERID: string;
+}

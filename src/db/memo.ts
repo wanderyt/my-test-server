@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { MemoRecord } from '../storage/types';
+import { MemoRecord, MemoRecordDB } from '../storage/types';
 
 const cookieName = process.env.COOKIE_NAME;
 const cookieValue = process.env.COOKIE_VALUE;
@@ -14,7 +14,7 @@ export const createMemo = (data: MemoRecord) => {
 
 export const getMemo = (userId: string): Promise<AxiosResponse<{
   data: {
-    rows: MemoRecord[]
+    rows: MemoRecordDB[]
   }
 }>> => {
   return axios.get(`http://fin.doublerb.cn/api/slack/getMemos?userId=${userId}`, {
