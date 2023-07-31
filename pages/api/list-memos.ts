@@ -276,9 +276,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
     };
 
+    const memoData = memoRecords.data.data.rows;
+    console.log("memoData: ", memoData);
+    const memoBlocks = memoData.map(memoTemplate);
+    console.log("memoBlocks: ", memoBlocks);
+
     const blocks = {
       // blocks: memoRecords.filter((record) => record.userId === (req.body as SlackMessageRequest).user_id).map(memoTemplate)
-      blocks: memoRecords.data.data.rows.map(memoTemplate)
+      // blocks: memoRecords.data.data.rows.map(memoTemplate)
+      blocks: memoBlocks
     };
     res.status(200).json(blocks);
   } catch (e) {
