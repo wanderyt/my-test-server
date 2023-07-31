@@ -42,9 +42,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const callbackId = (reqBody as ModalSubmitPayload).view.callback_id;
       if (callbackId === 'create_memo_modal') {
         const memo = await createMemoHandler(reqBody);
-        await postMessage({
-          message: 'Saved this memo - ' + memo.url
-        });
+        // await postMessage({
+        //   message: 'Saved this memo - ' + memo.url
+        // });
         res.status(200).send('');
       }
     }
