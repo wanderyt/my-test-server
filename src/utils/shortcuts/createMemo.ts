@@ -6,7 +6,11 @@ import { ModalSubmitPayload } from "../slack-modal-submit";
 import { createMemo } from "../../db/memo";
 
 export const saveMemoHandler = (response: ShortcutCallbackResponse) => {
-  console.log("reply response data: ", response);
+  let channelUrl = `https://cash.slack.com/archives/${response.channel.id}/p${response.message_ts.split('.').join('')}`;
+  if (response.message.ts !== response.message.thread_ts) {
+    channelUrl = `${channelUrl}?thread_ts=${response.message.thread_ts}&cid=${response.channel.id}`;
+  }
+
   const viewBlocks = {
     "title": {
       "type": "plain_text",
@@ -36,7 +40,7 @@ export const saveMemoHandler = (response: ShortcutCallbackResponse) => {
     "type": "modal",
     "callback_id": "create_memo_modal",
     "private_metadata": JSON.stringify({
-      originalChatUrl: `https://cash.slack.com/archives/${response.channel.id}/p${response.message_ts.split('.').join('')}`
+      originalChatUrl: channelUrl
     }),
   };
 

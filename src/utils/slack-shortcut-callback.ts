@@ -76,6 +76,43 @@ const callbackResponse = {
   }
 };
 
+const replyCallbackResponse = {
+  type: 'message_action',
+  token: 'hcwQPzye2Pyoo1CsGeIYK1to',
+  action_ts: '1690795966.743295',
+  team: {
+    id: 'T01H5TZGHUJ',
+    domain: 'cash',
+    enterprise_id: 'E01BAFDEXUP',
+    enterprise_name: 'Block, Inc.'
+  },
+  user: {
+    id: 'U02UQL045PZ',
+    username: '050897',
+    team_id: 'T01H5TZGHUJ',
+    name: '050897'
+  },
+  channel: { id: 'C034PDT3SKF', name: 'ap-askafterpayiq' },
+  is_enterprise_install: false,
+  enterprise: { id: 'E01BAFDEXUP', name: 'Block, Inc.' },
+  callback_id: 'create_memo',
+  trigger_id: '5662939408226.1583951561970.d13df4df673d575ef24003735258bb17',
+  response_url: 'https://hooks.slack.com/app/T01H5TZGHUJ/5662828863395/ofiP7VRAIpky9IrtyfQiA7sg',
+  message_ts: '1690772391.550279',
+  message: {
+    client_msg_id: '80fe5d35-e6e2-46a2-bee2-dc54cccca9df',
+    type: 'message',
+    text: '<@U03032T1BJ5> can you help to elaborate more on the user action details? I believe there should be two merchant id dropdown in hub iQ page. Not sure which one user is switching on?',
+    user: 'U02UQL045PZ',
+    ts: '1690772391.550279',
+    blocks: [ [Object] ],
+    team: 'T01H5TZGHUJ',
+    edited: { user: 'U02UQL045PZ', ts: '1690772401.000000' },
+    thread_ts: '1690318537.128419',
+    parent_user_id: 'U03032T1BJ5'
+  }
+};
+
 const memoCallback = {
   "type": "message_action",
   "token": "hcwQPzye2Pyoo1CsGeIYK1to",
