@@ -6,6 +6,7 @@ import { ModalSubmitPayload } from "../slack-modal-submit";
 import { createMemo } from "../../db/memo";
 
 export const saveMemoHandler = (response: ShortcutCallbackResponse) => {
+  console.log("reply response data: ", response);
   const viewBlocks = {
     "title": {
       "type": "plain_text",
