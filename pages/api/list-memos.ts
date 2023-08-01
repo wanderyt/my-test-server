@@ -6,6 +6,8 @@ import { getMemo } from '../../src/db/memo';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
+    console.log("request body: ", req.body);
+    console.log("request query: ", req.query);
     // const memoRecords = getMemoRecords();
     const userId = (req.body as SlackMessageRequest).user_id;
     const memoRecords = await getMemo(userId);
