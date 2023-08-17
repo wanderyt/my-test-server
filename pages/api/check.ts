@@ -1,4 +1,3 @@
-import { getMemoRecords } from '../../src/storage';
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { SlackMessageRequest } from '../../src/utils/slack-message';
 const { WebClient } = require('@slack/web-api');
@@ -27,20 +26,29 @@ const uploadFile = async ({
   console.log('file upload res: ', res);
   console.log('File uploaded: ', res.file.id);
   return res;
-}
+};
 
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     console.log("req.body: ", req.body);
     const body = req.body as SlackMessageRequest;
-    const res = await uploadFile({
+    // const res = await uploadFile({
+    //   fileName: 'test.json',
+    //   filePath: '../../src/files/test.json',
+    //   channels: body.channel_id
+    // })
+    uploadFile({
       fileName: 'test.json',
       filePath: '../../src/files/test.json',
       channels: body.channel_id
+    }).then((res) => {
+      res.status(200).json({status: true});
+    }).catch(e => {
+      console.log("error: ", e);
+      res.status(500)
     })
-    res.status(200).json({status: true});
   } catch (e) {
-    res.status(200);
+    res.status(500);
   }
 }
