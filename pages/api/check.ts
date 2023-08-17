@@ -38,6 +38,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     //   filePath: '../../src/files/test.json',
     //   channels: body.channel_id
     // })
+
+    console.log("current path: ", __dirname);
+
     uploadFile({
       fileName: 'test.json',
       filePath: '../../src/files/test.json',
