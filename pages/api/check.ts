@@ -60,7 +60,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       // filename: 'test.json',
       channels: body.channel_id,
       initial_comment: 'Here is the new company logo',
-    }).then((res) => {
+    }).then((response) => {
       res.status(200).json({status: true});
     }).catch(e => {
       console.log("error: ", e);
