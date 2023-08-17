@@ -49,7 +49,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     console.log("fsExist: ", fsExist);
     const fileContent = await fs.readFile(filePath, { encoding: 'utf8' });
 
-    console.log("file content: ", fileContent)
+    console.log("file content: ", fileContent);
+    console.log("file read success");
 
     web.files.uploadV2({
       file: fileContent,  // also accepts Buffer or ReadStream
