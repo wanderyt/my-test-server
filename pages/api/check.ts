@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { SlackMessageRequest } from '../../src/utils/slack-message';
 import path from 'path';
 const { WebClient } = require('@slack/web-api');
+import fs from 'fs/promises';
 
 const token = process.env.SLACK_MESSAGER_BOT_TOKEN;
 const web = new WebClient(token);
@@ -43,6 +44,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     console.log("current path: ", __dirname);
     console.log("current cwd: ", process.cwd());
     const filePath = path.join(process.cwd(), 'src', 'files')
+
+    const fsExist = await fs.stat(filePath);
+    console.log("fsExist: ", fsExist);
 
     uploadFile({
       fileName: 'test.json',
