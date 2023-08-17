@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { SlackMessageRequest } from '../../src/utils/slack-message';
+import path from 'path';
 const { WebClient } = require('@slack/web-api');
 
 const token = process.env.SLACK_MESSAGER_BOT_TOKEN;
@@ -41,10 +42,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     console.log("current path: ", __dirname);
     console.log("current cwd: ", process.cwd());
+    const filePath = path.join(process.cwd(), 'src', 'files')
 
     uploadFile({
       fileName: 'test.json',
-      filePath: '../../src/files/test.json',
+      filePath: filePath,
       channels: body.channel_id
     }).then((res) => {
       res.status(200).json({status: true});
