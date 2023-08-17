@@ -40,6 +40,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // })
 
     console.log("current path: ", __dirname);
+    console.log("current cwd: ", process.cwd());
 
     uploadFile({
       fileName: 'test.json',
