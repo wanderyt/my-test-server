@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { SlackMessageRequest } from '../../src/utils/slack-message';
 const { WebClient } = require('@slack/web-api');
 
-const token = process.env.SLACK_BOT_TOKEN;
+const token = process.env.SLACK_MESSAGER_BOT_TOKEN;
 const web = new WebClient(token);
 
 const uploadFile = async ({
