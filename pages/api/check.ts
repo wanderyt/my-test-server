@@ -44,7 +44,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     console.log("current path: ", __dirname);
     console.log("current cwd: ", process.cwd());
-    const filePath = path.join(process.cwd(), 'src', 'files')
+    const filePath = path.join(process.cwd(), 'src', 'files', 'test.json')
 
     const fsExist = await fspromises.stat(filePath);
     const isExist = fs.existsSync(filePath);
@@ -57,7 +57,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     web.files.uploadV2({
       filePath: filePath, // fileContent,  // also accepts Buffer or ReadStream
-      filename: 'test.json',
+      // filename: 'test.json',
       channels: body.channel_id,
       initial_comment: 'Here is the new company logo',
     }).then((res) => {
