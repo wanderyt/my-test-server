@@ -56,8 +56,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     console.log("file read success");
 
     web.files.uploadV2({
-      filePath: filePath, // fileContent,  // also accepts Buffer or ReadStream
-      // filename: 'test.json',
+      file: filePath, // fileContent,  // also accepts Buffer or ReadStream
+      filename: 'test.json',
       channels: body.channel_id,
       initial_comment: 'Here is the new company logo',
     }).then((response) => {
