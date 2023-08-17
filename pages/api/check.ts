@@ -50,13 +50,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const isExist = fs.existsSync(filePath);
     console.log("fsExist: ", fsExist);
     console.log("isExist: ", isExist);
-    const fileContent = await fspromises.readFile(filePath, { encoding: 'utf8' });
+    // const fileContent = await fspromises.readFile(filePath, { encoding: 'utf8' });
 
-    console.log("file content: ", fileContent);
+    // console.log("file content: ", fileContent);
     console.log("file read success");
 
     web.files.uploadV2({
-      file: fileContent,  // also accepts Buffer or ReadStream
+      filePath: filePath, // fileContent,  // also accepts Buffer or ReadStream
       filename: 'test.json',
       channels: body.channel_id,
       initial_comment: 'Here is the new company logo',
