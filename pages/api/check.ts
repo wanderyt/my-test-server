@@ -59,7 +59,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     web.files.uploadV2({
       file: filePath, // fileContent,  // also accepts Buffer or ReadStream
       filename: 'test.json',
-      channels: defaultFileUploadChannel || body.channel_id,
+      channel_id: defaultFileUploadChannel || body.channel_id,
       initial_comment: 'This is a test uploaded file',
     }).then((response) => {
       res.status(200);
