@@ -18,8 +18,8 @@ const uploadFile = async ({
   channels: string,
   initialComment?: string
 }) => {
-  const res = await web.files.upload({
-    file: filePath,  // also accepts Buffer or ReadStream
+  const res = await web.files.uploadV2({
+    file: '',  // also accepts Buffer or ReadStream
     filename: fileName,
     channels,
     initial_comment: initialComment || 'Here is the new company logo',
@@ -47,17 +47,30 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const fsExist = await fs.stat(filePath);
     console.log("fsExist: ", fsExist);
+    const fileContent = await fs.readFile(filePath);
 
-    uploadFile({
-      fileName: 'test.json',
-      filePath: filePath,
-      channels: body.channel_id
+    web.files.uploadV2({
+      file: fileContent,  // also accepts Buffer or ReadStream
+      filename: 'test.json',
+      channels: body.channel_id,
+      initial_comment: 'Here is the new company logo',
     }).then((res) => {
       res.status(200).json({status: true});
     }).catch(e => {
       console.log("error: ", e);
-      res.status(500)
-    })
+      res.status(500);
+    });
+
+    // uploadFile({
+    //   fileName: 'test.json',
+    //   filePath: filePath,
+    //   channels: body.channel_id
+    // }).then((res) => {
+    //   res.status(200).json({status: true});
+    // }).catch(e => {
+    //   console.log("error: ", e);
+    //   res.status(500)
+    // })
   } catch (e) {
     res.status(500);
   }
