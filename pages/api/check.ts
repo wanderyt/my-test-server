@@ -7,6 +7,7 @@ import fs from 'fs';
 
 const token = process.env.SLACK_MESSAGER_BOT_TOKEN;
 const web = new WebClient(token);
+const defaultFileUploadChannel = 'C05H9PJRM34';
 
 const uploadFile = async ({
   filePath,
@@ -58,10 +59,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     web.files.uploadV2({
       file: filePath, // fileContent,  // also accepts Buffer or ReadStream
       filename: 'test.json',
-      channels: body.channel_id,
-      initial_comment: 'Here is the new company logo',
+      channels: defaultFileUploadChannel || body.channel_id,
+      initial_comment: 'This is a test uploaded file',
     }).then((response) => {
-      res.status(200).json({status: true});
+      res.status(200);
     }).catch(e => {
       console.log("error: ", e);
       res.status(500);
