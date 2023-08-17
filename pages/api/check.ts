@@ -2,7 +2,8 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { SlackMessageRequest } from '../../src/utils/slack-message';
 import path from 'path';
 const { WebClient } = require('@slack/web-api');
-import fs from 'fs/promises';
+import fspromises from 'fs/promises';
+import fs from 'fs';
 
 const token = process.env.SLACK_MESSAGER_BOT_TOKEN;
 const web = new WebClient(token);
@@ -45,9 +46,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     console.log("current cwd: ", process.cwd());
     const filePath = path.join(process.cwd(), 'src', 'files')
 
-    const fsExist = await fs.stat(filePath);
+    const fsExist = await fspromises.stat(filePath);
+    const isExist = fs.existsSync(filePath);
     console.log("fsExist: ", fsExist);
-    const fileContent = await fs.readFile(filePath, { encoding: 'utf8' });
+    console.log("isExist: ", isExist);
+    const fileContent = await fspromises.readFile(filePath, { encoding: 'utf8' });
 
     console.log("file content: ", fileContent);
     console.log("file read success");
